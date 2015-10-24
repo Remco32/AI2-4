@@ -42,17 +42,25 @@ class Map :
 
     ### you write this method
     def valueIteration(self) :
-        ### 1. initialize utilities to 0
-        ### 2. repeat value iteration loop until largest change is smaller than
-        ###    stop criterion
-        
-        pass #placeholder, delete when implementing
-        
-        
-
+        for s in self.states.values() :
+            if not s.isGoal:
+                s.utility = 0.0
+        U1= dict([(s,0) for s in self.states.values()])
+        change =0
+        while(change > self.stop_crit * (1 - self.gamma)/ self.gamma):
+            U= U1.copy()
+            for s in self.states.values():
+                if not s.isGoal:
+                  a = s.selectBestAction()
+                  U1[s] = s.reward + self.gamma * s.computeEU(a)
+                  change = max(change, abs(U1[s] - U[s]))
+                  s.utility = U[s]
     ### you write this method
     def policyIteration(self) :
         ### 1. initialize random policy
+        
+        
+        
         ### 2 repeat policy iteration loop until policy is stable
     
         pass #placeholder, delete when implementing
