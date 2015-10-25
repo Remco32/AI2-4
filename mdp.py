@@ -42,12 +42,10 @@ class Map :
 
     ### you write this method
     def valueIteration(self) :
-        for s in self.states.values() :
-            if not s.isGoal:
-                s.utility = 0.0
-        U1= dict([(s,0) for s in self.states.values()])
-        change =0
-        while(change > self.stop_crit * (1 - self.gamma)/ self.gamma):
+        U1= dict([(s,s.utility) for s in self.states.values()])
+        x=1 
+        while(x==1):
+            change =0
             U= U1.copy()
             for s in self.states.values():
                 if not s.isGoal:
@@ -55,8 +53,13 @@ class Map :
                   U1[s] = s.reward + self.gamma * s.computeEU(a)
                   change = max(change, abs(U1[s] - U[s]))
                   s.utility = U[s]
+            if change < self.stop_crit :
+                x= 0
+             
     ### you write this method
     def policyIteration(self) :
+
+        
         ### 1. initialize random policy
         
         
