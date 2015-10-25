@@ -45,7 +45,7 @@ class Map :
         U1= dict([(s,s.utility) for s in self.states.values()])
         x=1 
         while(x==1):
-            change =0
+            change =0.0
             U= U1.copy()
             for s in self.states.values():
                 if not s.isGoal:
@@ -53,21 +53,28 @@ class Map :
                   U1[s] = s.reward + self.gamma * s.computeEU(a)
                   change = max(change, abs(U1[s] - U[s]))
                   s.utility = U[s]
-            if change < self.stop_crit :
+            if change < self.stop_crit * (1 - self.gamma) / self.gamma :
                 x= 0
              
     ### you write this method
     def policyIteration(self) :
-
-        
-        ### 1. initialize random policy
-        
-        
+        for s in self.states.values():
+            s.policy = random.choice(s.actions)
+        for s in self.states.values():
+            x=1
+            while (x==1) :
+                U = self.calculateUtilitiesLinear()
+                unchanged = True
+                for s in self.states.values():
+                    a = s.selectBestAction()
+                    if a != s.policy:
+                        s.policy = a
+                        unchanged = False
+                    if unchanged:
+                     x=0
         
         ### 2 repeat policy iteration loop until policy is stable
-    
-        pass #placeholder, delete when implementing
-    
+
     def calculateUtilitiesLinear(self) :
         n_states = len(self.states)
         coeffs = numpy.zeros((n_states, n_states))
