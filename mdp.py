@@ -137,7 +137,7 @@ class Map :
             for c in range(self.n_cols) :
                 to_print = to_print + "--------:"
             to_print = to_print + '\n'
-        print to_print
+        print (to_print)
 
 def makeRNProblem() :
     """
@@ -252,6 +252,3 @@ def make2DProblem() :
             (0.1, m.states[filterState(s[0], getSuccessor(s[0], right(a)))])]
 
     return m
-        
-            
-            
