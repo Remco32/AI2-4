@@ -57,7 +57,7 @@ class Map :
                   loopCount = loopCount + 1
             if change < self.stop_crit * (1 - self.gamma) / self.gamma :
                 x= 0
-                print("The amount of itterations needed for valueIteration was %d" %(loopCount))
+                print("The amount of iterations needed for valueIteration was %d" %(loopCount))
              
     ### you write this method
     def policyIteration(self) :
@@ -77,7 +77,7 @@ class Map :
                         unchanged = False
                     if unchanged:
                      x=0
-        print("The amount of itterations needed for policyIteration was %d" %(loopCount))
+        print("The amount of iterations needed for policyIteration was %d" %(loopCount))
         
         ### 2 repeat policy iteration loop until policy is stable
 
