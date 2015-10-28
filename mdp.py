@@ -3,6 +3,7 @@
 import random
 import numpy
 from problem_utils import *
+import time
 
 class State :
 
@@ -45,6 +46,7 @@ class Map :
         U1= dict([(s,s.utility) for s in self.states.values()])
         x=1
         loopCount = 0 
+        t = time.clock()
         while(x==1):
             change =0.0
             U= U1.copy()
@@ -57,11 +59,13 @@ class Map :
                   loopCount = loopCount + 1
             if change < self.stop_crit * (1 - self.gamma) / self.gamma :
                 x= 0
-                print("The amount of iterations needed for valueIteration was %d" %(loopCount))
+        print("The amount of iterations needed for valueIteration was %d" %(loopCount))
+        print time.clock() - t, "seconds process time"
              
     ### you write this method
     def policyIteration(self) :
         loopCount = 0 
+        t = time.clock()
         for s in self.states.values():
             s.policy = random.choice(s.actions)
         for s in self.states.values():
@@ -78,6 +82,7 @@ class Map :
                     if unchanged:
                      x=0
         print("The amount of iterations needed for policyIteration was %d" %(loopCount))
+        print time.clock() - t, "seconds process time"
         
         ### 2 repeat policy iteration loop until policy is stable
 
