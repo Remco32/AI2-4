@@ -43,7 +43,8 @@ class Map :
     ### you write this method
     def valueIteration(self) :
         U1= dict([(s,s.utility) for s in self.states.values()])
-        x=1 
+        x=1
+        loopCount = 0 
         while(x==1):
             change =0.0
             U= U1.copy()
@@ -53,11 +54,14 @@ class Map :
                   U1[s] = s.reward + self.gamma * s.computeEU(a)
                   change = max(change, abs(U1[s] - U[s]))
                   s.utility = U[s]
+                  loopCount = loopCount + 1
             if change < self.stop_crit * (1 - self.gamma) / self.gamma :
                 x= 0
+                print("The amount of itterations needed for valueIteration was %d" %(loopCount))
              
     ### you write this method
     def policyIteration(self) :
+        loopCount = 0 
         for s in self.states.values():
             s.policy = random.choice(s.actions)
         for s in self.states.values():
@@ -67,11 +71,13 @@ class Map :
                 unchanged = True
                 for s in self.states.values():
                     a = s.selectBestAction()
+                    loopCount = loopCount + 1
                     if a != s.policy:
                         s.policy = a
                         unchanged = False
                     if unchanged:
                      x=0
+        print("The amount of itterations needed for valueIteration was %d" %(loopCount))
         
         ### 2 repeat policy iteration loop until policy is stable
 
