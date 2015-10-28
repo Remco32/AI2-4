@@ -77,7 +77,7 @@ class Map :
                         unchanged = False
                     if unchanged:
                      x=0
-        print("The amount of itterations needed for valueIteration was %d" %(loopCount))
+        print("The amount of itterations needed for policyIteration was %d" %(loopCount))
         
         ### 2 repeat policy iteration loop until policy is stable
 
